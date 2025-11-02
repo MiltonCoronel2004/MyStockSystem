@@ -1,4 +1,5 @@
 import { Product } from "../models/Product.js";
+import { User } from "../models/User.js";
 
 export const createProduct = async (req, res) => {
   try {
@@ -12,7 +13,8 @@ export const createProduct = async (req, res) => {
 
 export const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.findAll();
+    const user = User.findOne({ where: { email: req.userEmail } });
+    const products = await Product.findAll({ where: { id: user.id } });
     res.json({ error: false, products });
   } catch (err) {
     res.status(500).json({ error: true, msg: err.message });
