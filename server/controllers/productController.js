@@ -16,7 +16,7 @@ export const getAllProducts = async (req, res) => {
     const user = await User.findOne({ where: { email: req.userEmail } });
     if (!user) return res.status(404).json({ error: true, msg: "Usuario no encontrado" });
 
-    const products = await Product.findAll({ where: { userId: user.id } });
+    const products = await Product.findAll({ where: { id: user.id } });
 
     res.json({ error: false, products });
   } catch (err) {
