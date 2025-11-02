@@ -4,7 +4,7 @@ import { ArrowLeft, Save } from "lucide-react";
 import { toast } from "react-toastify";
 
 const url = import.meta.env.VITE_API_URL;
-const token = JSON.parse(localStorage.getItem("token"))?.state?.user?.token;
+let token = null;
 
 export default function EditProduct() {
   const { id } = useParams();
@@ -39,6 +39,8 @@ export default function EditProduct() {
   };
 
   useEffect(() => {
+    token = JSON.parse(localStorage.getItem("token"))?.state?.user?.token;
+
     getProduct();
   }, []);
 
