@@ -12,5 +12,5 @@ export const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER,
   dialectModule: mysql2,
   dialectOptions: isProd ? { ssl: { require: true, rejectUnauthorized: false } } : {},
   pool: isProd ? { max: 1, min: 0, acquire: 3000, idle: 10000 } : { max: 5, min: 0, acquire: 30000, idle: 10000 },
-  logging: !isProd,
+  logging: false,
 });

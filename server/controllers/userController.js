@@ -47,7 +47,7 @@ export const loginUser = async (req, res) => {
     const checkPasswd = await bcrypt.compare(password, user.hash);
     if (!checkPasswd) return res.status(403).json({ error: true, msg: "Credenciales Incorrectas" });
 
-    const token = jwt.sign({ email }, process.env.SECRET);
+    const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: "1h" });
 
     res.json({
       error: false,
@@ -76,6 +76,7 @@ export const logoutUser = async (req, res) => {
 
     res.json({ error: false, msg: "Sesión cerrada e invalidada" });
   } catch (err) {
-    res.status(500).json({ error: true, msg: "Error al cerrar sesión" });
+    res.status(500).json({ error: true, msg: err });
+    console.log(err);
   }
 };
