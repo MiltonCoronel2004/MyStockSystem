@@ -1,24 +1,20 @@
-// sync.js
-// === Sincronización con base de datos Aiven MySQL ===
+// server/sync.js
+import dotenv from "dotenv";
+dotenv.config({ path: "./server/.env" }); // fuerza la carga del .env correcto
 
 import { sequelize } from "./config/db.js";
-
-// Importar todos los modelos definidos
-import "./models/User.js";
-import "./models/Product.js";
-import "./models/TokenBlacklist.js";
-
+import "./models/associations.js";
 
 (async () => {
   try {
+    console.log("DB_USER:", process.env.DB_USER);
     await sequelize.authenticate();
     console.log("✅ Conexión establecida correctamente");
-    await sequelize.sync({ alter: true }); // crea o actualiza tablas según los modelos
+    await sequelize.sync({ alter: true });
     console.log("✅ Tablas sincronizadas correctamente");
   } catch (err) {
     console.error("❌ Error al sincronizar:", err);
   } finally {
-    await sequelize.close();
     process.exit();
   }
 })();
