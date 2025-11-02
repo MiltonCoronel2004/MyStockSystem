@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const url = import.meta.env.VITE_API_URL;
-const token = JSON.parse(localStorage.getItem("token")).state.user.token;
+const token = JSON.parse(localStorage.getItem("token"))?.state.user.token;
 
 export default function Products() {
   const [products, setProducts] = useState([]);
