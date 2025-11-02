@@ -77,6 +77,5 @@ export const logoutUser = async (req, res) => {
     res.json({ error: false, msg: "Sesión cerrada e invalidada" });
   } catch (err) {
     res.status(500).json({ error: true, msg: err });
-    console.log(err);
   }
 };

@@ -13,7 +13,6 @@ export const verifyAuth = async (req, res, next) => {
 
     const jwtInfo = jwt.verify(token, process.env.SECRET);
     req.userEmail = jwtInfo.email;
-    console.log(req.userEmail);
 
     next();
   } catch {

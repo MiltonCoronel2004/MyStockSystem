@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 const url = import.meta.env.VITE_API_URL;
-const token = JSON.parse(localStorage.getItem("token"))?.state?.user?.token;
-
+let token = null;
 export default function Products() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
@@ -24,7 +23,6 @@ export default function Products() {
         toast.error(data.msg);
         return;
       }
-      console.log(data.products);
       setLoading(false);
       setProducts(data.products);
     } catch (e) {
@@ -33,6 +31,7 @@ export default function Products() {
   };
 
   useEffect(() => {
+    token = JSON.parse(localStorage.getItem("token"))?.state?.user?.token;
     getAllProducts();
   }, []);
 
@@ -50,7 +49,6 @@ export default function Products() {
       const data = await res.json();
 
       if (data.error) {
-        console.log(data);
         toast.error(data.msg);
         return;
       }

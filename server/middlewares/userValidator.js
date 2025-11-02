@@ -21,7 +21,6 @@ export const createUserValidator = [
           email,
         },
       });
-      console.log(user);
 
       if (user) throw new Error("El email ya esta registrado");
 

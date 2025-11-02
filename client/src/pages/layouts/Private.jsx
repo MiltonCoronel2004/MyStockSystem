@@ -40,7 +40,6 @@ export default function Private() {
       });
 
       const res = await req.json();
-      console.log(res);
 
       if (res.error) {
         toast.error(res.msg || "Error al cerrar sesión");
