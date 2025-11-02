@@ -13,8 +13,11 @@ export const createProduct = async (req, res) => {
 
 export const getAllProducts = async (req, res) => {
   try {
-    const user = User.findOne({ where: { email: req.userEmail } });
-    const products = await Product.findAll({ where: { id: user.id } });
+    const user = await User.findOne({ where: { email: req.userEmail } });
+    if (!user) return res.status(404).json({ error: true, msg: "Usuario no encontrado" });
+
+    const products = await Product.findAll({ where: { userId: user.id } });
+
     res.json({ error: false, products });
   } catch (err) {
     res.status(500).json({ error: true, msg: err.message });
