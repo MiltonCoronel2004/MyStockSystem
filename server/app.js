@@ -10,6 +10,11 @@ const app = express();
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json());
+
+app.get("/", (_req, res) => {
+  res.status(200).json({ message: "API MyStockSystem online" });
+});
+
 app.use(userRoutes);
 app.use(productRoutes);
 
