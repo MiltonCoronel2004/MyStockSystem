@@ -105,7 +105,8 @@ export default function EditProduct() {
               <ArrowLeft size={20} />
             </button>
             <h2 className="text-2xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Editar Producto #{id}
+              Editar Producto
+              {/* #{id} */}
             </h2>
           </div>
         </div>
