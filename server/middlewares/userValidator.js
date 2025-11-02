@@ -16,13 +16,13 @@ export const createUserValidator = [
     .isEmail()
     .withMessage("Debe proporcionar un email válido")
     .custom(async (email) => {
-      const user = User.findOne({
+      const user = await User.findOne({
         where: {
           email,
         },
       });
       console.log(user);
-      
+
       if (user) throw new Error("El email ya esta registrado");
 
       return true;
