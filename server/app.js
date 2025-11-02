@@ -5,6 +5,7 @@ import cors from "cors";
 import { sequelize } from "./config/db.js";
 import { userRoutes } from "./routes/userRoutes.js";
 import { productRoutes } from "./routes/productRoutes.js";
+import "./models/associations.js";
 
 const app = express();
 
