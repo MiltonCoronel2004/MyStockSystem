@@ -1,6 +1,6 @@
 # MyStockSystem Client
 
-Members: [miltoncoronel2004](https://github.com/MiltonCoronel2004), [zjohnsan](https://github.com/zjohnsan), [IbzJuanma](https://github.com/IbzJuanma)
+Desarrolladores: [miltoncoronel2004](https://github.com/MiltonCoronel2004), [zjohnsan](https://github.com/zjohnsan), [IbzJuanma](https://github.com/IbzJuanma)
 
 ## Instalación del Servidor
 
