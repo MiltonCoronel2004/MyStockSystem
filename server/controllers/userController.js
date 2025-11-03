@@ -24,6 +24,7 @@ export const createUser = async (req, res) => {
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
+    const activateToken = "123";
 
     const user = await User.create({
       fullName,
@@ -42,13 +43,11 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
-    if (!user) return res.status(401).json({ error: true, msg: "Credenciales Incorrectas" });
+    if (!user) return res.status(404).json({ error: true, msg: "Credenciales Incorrectas" });
     const checkPasswd = await bcrypt.compare(password, user.hash);
     if (!checkPasswd) return res.status(403).json({ error: true, msg: "Credenciales Incorrectas" });
 
     const token = jwt.sign({ email }, process.env.SECRET, { expiresIn: "1h" });
-
-    await User.update({ token });
 
     res.json({
       error: false,
@@ -80,15 +79,3 @@ export const logoutUser = async (req, res) => {
     res.status(500).json({ error: true, msg: err });
   }
 };
-
-// export const getLoggedInfo = async (req, res) => {
-//   try {
-//     if (!req.userEmail) return res.status(403).json({ error: true, msg: "No existe email" });
-//     const user = await User.findOne({ where: { email: req.userEmail } });
-//     if (!user) return res.status(404).json({ error: true, msg: "Usuario no encontrado" });
-
-//     res.json({ error: false, user });
-//   } catch (e) {
-//     console.error(e);
-//   }
-// };
