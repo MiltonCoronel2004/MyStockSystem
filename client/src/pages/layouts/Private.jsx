@@ -43,6 +43,11 @@ export default function Private() {
 
       if (res.error) {
         toast.error(res.msg || "Error al cerrar sesión");
+        setUser({
+          full_name: null,
+          email: null,
+          token: null,
+        });
         setLoading(false);
         return;
       }
