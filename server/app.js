@@ -11,6 +11,7 @@ const app = express();
 
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json());
+app.use(express.static("public"));
 
 app.get("/", (_req, res) => {
   res.setHeader("Content-Type", "text/html");
