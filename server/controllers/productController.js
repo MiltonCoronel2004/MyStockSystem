@@ -3,8 +3,10 @@ import { User } from "../models/User.js";
 
 export const createProduct = async (req, res) => {
   try {
+    const user = await User.findOne({ where: { email: req.userEmail } });
+    if (!user) return res.status(404).json({ error: true, msg: "Usuario no encontrado" });
     const { name, price, stock } = req.body;
-    const product = await Product.create({ name, price, stock });
+    const product = await Product.create({ name, price, stock, user_id: user.id });
     res.json({ error: false, msg: "Producto creado", product });
   } catch (err) {
     res.status(400).json({ error: true, msg: err.message });
