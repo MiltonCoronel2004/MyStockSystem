@@ -13,7 +13,21 @@ app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json());
 
 app.get("/", (_req, res) => {
-  res.status(200).json({ message: "API MyStockSystem online" });
+  res.setHeader("Content-Type", "text/html");
+  res.status(200).send(`
+    <!DOCTYPE html>
+    <html lang="es">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>API MyStockSystem</title>
+        <link rel="icon" href="/favicon.png" type="image/png" />
+      </head>
+      <body>
+        <h1>API MyStockSystem online</h1>
+      </body>
+    </html>
+  `);
 });
 
 app.use(userRoutes);
