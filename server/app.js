@@ -20,13 +20,13 @@ app.use(userRoutes);
 app.use(productRoutes);
 
 // sincroniza DB una vez por invocación
-app.use(async (_req, _res, next) => {
+app.use(async (_req, res, next) => {
   try {
     await sequelize.authenticate();
     next();
   } catch (err) {
     console.error("Error conexión DB", err);
-    _res.status(500).json({ error: "DB error" });
+    res.status(500).json({ error: "DB error" });
   }
 });
 

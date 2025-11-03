@@ -7,7 +7,6 @@ import "./models/associations.js";
 
 (async () => {
   try {
-    console.log("DB_USER:", process.env.DB_USER);
     await sequelize.authenticate();
     console.log("✅ Conexión establecida correctamente");
     await sequelize.sync({ alter: true });
