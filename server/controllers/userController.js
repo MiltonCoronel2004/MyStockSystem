@@ -81,14 +81,14 @@ export const logoutUser = async (req, res) => {
   }
 };
 
-export const getLoggedInfo = async (req, res) => {
-  try {
-    if (!req.userEmail) return res.status(403).json({ error: true, msg: "No existe email" });
-    const user = await User.findOne({ where: { email: req.userEmail } });
-    if (!user) return res.status(404).json({ error: true, msg: "Usuario no encontrado" });
+// export const getLoggedInfo = async (req, res) => {
+//   try {
+//     if (!req.userEmail) return res.status(403).json({ error: true, msg: "No existe email" });
+//     const user = await User.findOne({ where: { email: req.userEmail } });
+//     if (!user) return res.status(404).json({ error: true, msg: "Usuario no encontrado" });
 
-    res.json({ error: false, user });
-  } catch (e) {
-    console.error(e);
-  }
-};
+//     res.json({ error: false, user });
+//   } catch (e) {
+//     console.error(e);
+//   }
+// };

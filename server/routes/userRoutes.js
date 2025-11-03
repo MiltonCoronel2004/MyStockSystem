@@ -11,4 +11,4 @@ userRoutes.post("/login", loginUserValidator, handleValidation, loginUser);
 
 userRoutes.get("/getusers", verifyAuth, getUsers);
 userRoutes.post("/logout", verifyAuth, logoutUser);
-userRoutes.get("/logged", getLoggedInfo);
+// userRoutes.get("/logged", getLoggedInfo);
