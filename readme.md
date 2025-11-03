@@ -75,7 +75,7 @@ Backend para el sistema de gestión de inventario y productos **MyStockSystem**.
 - Asegúrate de que la base de datos esté creada y accesible.
 - Para producción, configura correctamente las variables de entorno y utiliza un entorno seguro para el secreto JWT.
 
----
+
 
 
 
