@@ -1,5 +1,7 @@
 # MyStockSystem Client
 
+Members: @miltoncoronel2004, @zjohnsan
+
 ## Instalación del Servidor
 
 Backend para el sistema de gestión de inventario y productos **MyStockSystem**. Desarrollado en Node.js con Express, utiliza Sequelize para la gestión de base de datos y JWT para autenticación.
