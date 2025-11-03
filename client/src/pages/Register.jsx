@@ -93,7 +93,7 @@ export default function Register() {
         value={confirmPassword}
         onChange={(e) => setConfirmPassword(e.target.value)}
       />
-      <Button type="submit" value={`${loading ? "Cargando..." : "Registrase"}`} />
+      <Button type="submit" value={loading ? null : "Registrarse"} disabled={loading} />
     </Form>
   );
 }
