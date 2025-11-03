@@ -10,13 +10,13 @@ export default function Private() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const loggedUser = async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/logged`);
-      const data = await res.json();
+    // const loggedUser = async () => {
+    //   const res = await fetch(`${import.meta.env.VITE_API_URL}/logged`);
+    //   const data = await res.json();
 
-      return data.user;
-    };
-    if (!user.token || user.token !== loggedUser.token) return navigate("/login");
+    //   return data.user;
+    // };
+    if (!user.token) return navigate("/login");
   }, [user, navigate]);
 
   if (!user.token) {
