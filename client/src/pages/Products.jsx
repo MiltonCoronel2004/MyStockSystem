@@ -11,6 +11,9 @@ export default function Products() {
 
   const getAllProducts = async () => {
     try {
+      if (!token) {
+        navigate("/");
+      }
       setLoading(true);
       const res = await fetch(`${url}/getproducts`, {
         method: "GET",
@@ -20,7 +23,7 @@ export default function Products() {
 
       if (data.error) {
         setLoading(false);
-        toast.error(data.msg);
+        toast.error(data.msg || "Error, se ha cerrado la sesión");
         return;
       }
       setLoading(false);

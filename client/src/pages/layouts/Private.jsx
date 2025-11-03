@@ -10,7 +10,13 @@ export default function Private() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!user.token) return navigate("/login");
+    const loggedUser = async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/logged`);
+      const data = await res.json();
+
+      return data.user;
+    };
+    if (!user.token || user.token !== loggedUser.token) return navigate("/login");
   }, [user, navigate]);
 
   if (!user.token) {
@@ -19,7 +25,7 @@ export default function Private() {
         <div className="relative w-16 h-16">
           <div className="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
           <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-400 border-r-blue-500 animate-spin shadow-[0_0_20px_rgba(34,211,238,0.4)]"></div>
-          <div className="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-500/20 to-blue-600/20 blur-sm"></div>
+          <div className="absolute inset-2 rounded-full bg-linear-to-br from-cyan-500/20 to-blue-600/20 blur-sm"></div>
         </div>
       </div>
     );
