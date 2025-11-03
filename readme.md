@@ -67,7 +67,7 @@ Backend para el sistema de gestión de inventario y productos **MyStockSystem**.
 - **Nodemon** (`cors`): Reiniciar el servidor automaticamente.
 
 
----
+
 
 ## Notas
 
