@@ -10,7 +10,7 @@ export default function EditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [loadingSubmit, setLoadingSubmit] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     price: "",
@@ -31,8 +31,8 @@ export default function EditProduct() {
         toast.error(error.msg);
         return;
       }
-
       setFormData({ name: data.product.name, price: data.product.price, stock: data.product.stock });
+      setLoading(false);
     } catch (e) {
       console.error(e);
     }
@@ -43,16 +43,6 @@ export default function EditProduct() {
 
     getProduct();
   }, []);
-
-  // if (loading) {
-  //   return (
-  //     <div className="relative w-16 h-16">
-  //       <div className="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
-  //       <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-400 border-r-blue-500 animate-spin shadow-[0_0_20px_rgba(34,211,238,0.4)]"></div>
-  //       <div className="absolute inset-2 rounded-full bg-linear-to-br from-cyan-500/20 to-blue-600/20 blur-sm"></div>
-  //     </div>
-  //   );
-  // }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -112,89 +102,94 @@ export default function EditProduct() {
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="p-6 space-y-5">
-          {/* Nombre */}
-          <div>
-            <label htmlFor="name" className="block text-sm font-semibold text-cyan-300 mb-2">
-              Nombre del Producto
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
-              placeholder="Ingrese el nombre"
-            />
-          </div>
-
-          {/* Precio y Stock en grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {/* Precio */}
+        {!loading ? (
+          <form onSubmit={handleSubmit} className="p-6 space-y-5">
             <div>
-              <label htmlFor="price" className="block text-sm font-semibold text-cyan-300 mb-2">
-                Precio ($)
+              <label htmlFor="name" className="block text-sm font-semibold text-cyan-300 mb-2">
+                Nombre del Producto
               </label>
               <input
-                type="number"
-                id="price"
-                name="price"
-                value={formData.price}
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                step="0.01"
-                min="0"
                 className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
-                placeholder="0.00"
+                placeholder="Ingrese el nombre"
               />
             </div>
 
-            {/* Stock */}
-            <div>
-              <label htmlFor="stock" className="block text-sm font-semibold text-cyan-300 mb-2">
-                Stock
-              </label>
-              <input
-                type="number"
-                id="stock"
-                name="stock"
-                value={formData.stock}
-                onChange={handleChange}
-                min="0"
-                className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
-                placeholder="0"
-              />
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="price" className="block text-sm font-semibold text-cyan-300 mb-2">
+                  Precio ($)
+                </label>
+                <input
+                  type="number"
+                  id="price"
+                  name="price"
+                  value={formData.price}
+                  onChange={handleChange}
+                  step="0.01"
+                  min="0"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
+                  placeholder="0.00"
+                />
+              </div>
+
+              <div>
+                <label htmlFor="stock" className="block text-sm font-semibold text-cyan-300 mb-2">
+                  Stock
+                </label>
+                <input
+                  type="number"
+                  id="stock"
+                  name="stock"
+                  value={formData.stock}
+                  onChange={handleChange}
+                  min="0"
+                  className="w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-700/50 text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500/50 focus:ring-2 focus:ring-cyan-500/20 transition-all duration-200"
+                  placeholder="0"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 pt-4">
+              <button
+                type="button"
+                onClick={() => navigate("/")}
+                className="flex-1 px-6 py-3 rounded-xl font-semibold text-slate-300 bg-slate-700/50 hover:bg-slate-600/50 border border-slate-600/50 transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                Cancelar
+              </button>
+              <button
+                type="submit"
+                disabled={loadingSubmit}
+                className="flex-1 px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-[0_4px_15px_rgba(34,211,238,0.3)] hover:shadow-[0_6px_20px_rgba(34,211,238,0.5)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+              >
+                {loadingSubmit ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Guardando...
+                  </>
+                ) : (
+                  <>
+                    <Save size={18} />
+                    Guardar Cambios
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className="flex items-center justify-center p-6">
+            <div className="relative w-16 h-16">
+              <div className="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-400 border-r-blue-500 animate-spin shadow-[0_0_20px_rgba(34,211,238,0.4)]"></div>
+              <div className="absolute inset-2 rounded-full bg-linear-to-br from-cyan-500/20 to-blue-600/20 blur-sm"></div>
             </div>
           </div>
-
-          {/* Botones */}
-          <div className="flex gap-3 pt-4">
-            <button
-              type="button"
-              onClick={() => navigate("/")}
-              className="flex-1 px-6 py-3 rounded-xl font-semibold text-slate-300 bg-slate-700/50 hover:bg-slate-600/50 border border-slate-600/50 transition-all duration-300 hover:scale-105 active:scale-95"
-            >
-              Cancelar
-            </button>
-            <button
-              type="submit"
-              disabled={loadingSubmit}
-              className="flex-1 px-6 py-3 rounded-xl font-semibold text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 transition-all duration-300 shadow-[0_4px_15px_rgba(34,211,238,0.3)] hover:shadow-[0_6px_20px_rgba(34,211,238,0.5)] hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
-            >
-              {loadingSubmit ? (
-                <>
-                  <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  Guardando...
-                </>
-              ) : (
-                <>
-                  <Save size={18} />
-                  Guardar Cambios
-                </>
-              )}
-            </button>
-          </div>
-        </form>
+        )}
       </div>
     </div>
   );

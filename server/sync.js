@@ -1,9 +1,8 @@
-// server/sync.js
 import dotenv from "dotenv";
-dotenv.config({ path: "./server/.env" }); // fuerza la carga del .env correcto
-
+dotenv.config();
 import { sequelize } from "./config/db.js";
-import "./models/associations.js";
+import "./models/TokenBlacklist.js";
+import "./models/associations.js"; // Associations esta cargando los modelos que relaciona
 
 (async () => {
   try {

@@ -7,14 +7,13 @@ let token = null;
 export default function Products() {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const getAllProducts = async () => {
     try {
       if (!token) {
         navigate("/");
       }
-      setLoading(true);
       const res = await fetch(`${url}/getproducts`, {
         method: "GET",
         headers: { Authorization: token },
@@ -61,6 +60,18 @@ export default function Products() {
       console.error(e);
     }
   };
+
+  if (loading) {
+    return (
+      <div class="flex items-center justify-center min-h-[80vh]">
+        <div className="relative w-16 h-16">
+          <div className="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
+          <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-400 border-r-blue-500 animate-spin shadow-[0_0_20px_rgba(34,211,238,0.4)]"></div>
+          <div className="absolute inset-2 rounded-full bg-linear-to-br from-cyan-500/20 to-blue-600/20 blur-sm"></div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full max-w-6xl mx-auto">
