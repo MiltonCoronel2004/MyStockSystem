@@ -64,7 +64,7 @@ Backend para el sistema de gestión de inventario y productos **MyStockSystem**.
 - **bcryptjs** (`bcryptjs`): Hashing de contraseñas.
 - **express-validator** (`express-validator`): Validación de datos en rutas.
 - **cors** (`cors`): Permitir solicitudes desde otros orígenes.
-- **Nodemon** (`cors`): Reiniciar el servidor automaticamente.
+- **Nodemon** (`nodemon`): Reiniciar el servidor automaticamente.
 
 
 ---
