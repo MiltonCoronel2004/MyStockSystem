@@ -104,7 +104,7 @@ Frontend para el sistema de gestión de inventario y productos **MyStockSystem**
      ```
    - Edita `.env` y coloca la URL de tu API backend:
      ```
-     VITE_API_URL=http://localhost:4000
+     VITE_API_URL=http://localhost:3000
      ```
 
 4. **Inicia el proyecto en modo desarrollo:**
@@ -131,7 +131,7 @@ Frontend para el sistema de gestión de inventario y productos **MyStockSystem**
 El archivo `.env` debe contener la siguiente variable:
 
 ```env
-VITE_API_URL=http://localhost:4000
+VITE_API_URL=http://localhost:3000
 ```
 
 - **VITE_API_URL:** URL base del backend (Express API). Cambia el valor según tu entorno (local, producción, etc).
