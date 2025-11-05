@@ -146,7 +146,7 @@ VITE_API_URL=http://localhost:3000
 
 ---
 
-### Rutas del Proyecto
+### Rutas del Backend
 
 | Ruta               | Método | Funcionalidad                                                                 |
 |--------------------|--------|-------------------------------------------------------------------------------|
