@@ -74,7 +74,7 @@ export default function Login() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <Button type="submit" value={loading ? null : "Iniciar Sesión"} disabled={loading} />
+      <Button type="submit" value={loading ? null : "Ingresar"} disabled={loading} />
     </Form>
   );
 }
