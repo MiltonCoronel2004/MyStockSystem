@@ -83,7 +83,7 @@ export default function Private() {
       });
 
       toast.success("Sesión cerrada correctamente");
-      navigate("/");
+      navigate("/login");
     } catch {
       toast.error("Error de conexión con el servidor");
     } finally {
@@ -134,7 +134,7 @@ export default function Private() {
               <button
                 onClick={handleLogout}
                 disabled={loading}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-red-400 hover:bg-slate-700/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-red-400 hover:bg-slate-700/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
                 title="Cerrar Sesión"
               >
                 <LogOut size={18} />
