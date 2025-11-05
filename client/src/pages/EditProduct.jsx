@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router";
 import { ArrowLeft, Save } from "lucide-react";
 import { toast } from "react-toastify";
+import { useStore } from "../store/useStore";
 
 const url = import.meta.env.VITE_API_URL;
-let token = null;
 
 export default function EditProduct() {
   const { id } = useParams();
@@ -17,6 +17,8 @@ export default function EditProduct() {
     stock: "",
     category: "",
   });
+  const { user } = useStore();
+  const [token, setToken] = useState(user.token);
 
   const getProduct = async () => {
     try {
@@ -39,8 +41,6 @@ export default function EditProduct() {
   };
 
   useEffect(() => {
-    token = JSON.parse(localStorage.getItem("token"))?.state?.user?.token;
-
     getProduct();
   }, []);
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUsers, createUser, loginUser, logoutUser } from "../controllers/userController.js";
+import { getUsers, createUser, loginUser, logoutUser, verifyToken } from "../controllers/userController.js";
 import { createUserValidator, loginUserValidator } from "../middlewares/userValidator.js";
 import { handleValidation } from "../middlewares/expressValidator.js";
 import { verifyAuth } from "../middlewares/authMiddleware.js";
@@ -8,6 +8,7 @@ export const userRoutes = Router();
 
 userRoutes.post("/register", createUserValidator, handleValidation, createUser);
 userRoutes.post("/login", loginUserValidator, handleValidation, loginUser);
-
 userRoutes.get("/getusers", verifyAuth, getUsers);
 userRoutes.post("/logout", verifyAuth, logoutUser);
+
+userRoutes.post("/verifytoken", verifyToken);

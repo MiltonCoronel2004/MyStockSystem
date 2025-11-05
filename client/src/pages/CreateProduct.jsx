@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { ArrowLeft, Plus } from "lucide-react";
 import { toast } from "react-toastify";
+import { useStore } from "../store/useStore";
 
 export default function CreateProduct() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function CreateProduct() {
     price: "",
     stock: "",
   });
+  const { user } = useStore();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,13 +27,12 @@ export default function CreateProduct() {
       e.preventDefault();
       if (loading) return;
       setLoading(true);
-      const token = JSON.parse(localStorage.getItem("token")).state.user.token;
 
       const res = await fetch(`${import.meta.env.VITE_API_URL}/createproduct`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: token,
+          Authorization: user.token,
         },
         body: JSON.stringify({
           name: formData.name,

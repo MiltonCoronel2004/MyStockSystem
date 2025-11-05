@@ -17,6 +17,7 @@ export const createProductValidator = [
       const num = parseFloat(value);
       if (num < 0) throw new Error("El precio no puede ser negativo");
       if (num === 0) throw new Error("El precio debe ser mayor que 0");
+      if (num > 99999999) throw new Error("El precio no puede exceder los 8 dígitos");
       return true;
     }),
 
@@ -35,6 +36,7 @@ export const updateProductValidator = [
       if (isNaN(num)) return true;
       if (num < 0) throw new Error("El precio no puede ser negativo");
       if (num === 0) throw new Error("El precio debe ser mayor que 0");
+      if (num > 99999999) throw new Error("El precio no puede exceder los 8 dígitos");
       return true;
     }),
 

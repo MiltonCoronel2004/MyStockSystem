@@ -1,4 +1,3 @@
-// server/index.js (solo para local)
 import app from "./app.js";
 import { sequelize } from "./config/db.js";
 const PORT = process.env.PORT || 3000;

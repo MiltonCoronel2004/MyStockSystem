@@ -12,6 +12,7 @@ const app = express();
 app.use(cors({ origin: process.env.CORS_ORIGIN || "*" }));
 app.use(express.json());
 
+// Para mostrar algo de contenido en la página que genera vercel
 app.get("/", (_req, res) => {
   res.status(200).json({ message: "API MyStockSystem online" });
 });
@@ -19,15 +20,14 @@ app.get("/", (_req, res) => {
 app.use(userRoutes);
 app.use(productRoutes);
 
-// sincroniza DB una vez por invocación
-app.use(async (_req, _res, next) => {
+app.use(async (_req, res, next) => {
   try {
     await sequelize.authenticate();
     next();
   } catch (err) {
     console.error("Error conexión DB", err);
-    _res.status(500).json({ error: "DB error" });
+    res.status(500).json({ error: "DB error" });
   }
 });
 
-export default app;
+export default app; // Exportamos app para poder usado en index local e index para vercel.

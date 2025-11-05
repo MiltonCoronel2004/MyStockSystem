@@ -34,18 +34,6 @@ User.init(
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    isActive: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-    activateToken: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-    },
-    lastLoginAt: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
   },
   {
     sequelize,

@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, NavLink } from "react-router";
+import { Outlet, useNavigate, NavLink, useLocation } from "react-router";
 import { useStore } from "../../store/useStore";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -8,16 +8,34 @@ export default function Private() {
   const { user, setUser } = useStore();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const location = useLocation();
+
+  const verifyToken = async () => {
+    const url = `${import.meta.env.VITE_API_URL}/verifytoken`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: user.token,
+      },
+    });
+    const data = await res.json();
+
+    if (data.error) {
+      setUser({
+        full_name: null,
+        email: null,
+        token: null,
+      });
+      navigate("/login");
+      return;
+    }
+  };
 
   useEffect(() => {
-    // const loggedUser = async () => {
-    //   const res = await fetch(`${import.meta.env.VITE_API_URL}/logged`);
-    //   const data = await res.json();
-
-    //   return data.user;
-    // };
     if (!user.token) return navigate("/login");
-  }, [user, navigate]);
+
+    verifyToken();
+  }, [location.pathname]);
 
   if (!user.token) {
     return (

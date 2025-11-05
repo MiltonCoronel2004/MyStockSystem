@@ -6,7 +6,7 @@ export const verifyAuth = async (req, res, next) => {
     const auth = req.headers.authorization;
     if (!auth) return res.status(401).json({ error: true, msg: "Token Requerido" });
 
-    const token = auth.split(" ")[1];
+    const token = auth.split(" ")[1]; // Separa Bearer Token y toma el token
 
     const blacklisted = await TokenBlacklist.findOne({ where: { token } });
     if (blacklisted) return res.status(401).json({ error: true, msg: "Token Invalido" });

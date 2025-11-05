@@ -1,22 +1,21 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-
+import { toast } from "react-toastify";
+import { useStore } from "../store/useStore";
 const url = import.meta.env.VITE_API_URL;
-let token = null;
+
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const { user } = useStore();
+  const navigate = useNavigate();
 
   const getAllProducts = async () => {
     try {
-      if (!token) {
-        navigate("/");
-      }
       const res = await fetch(`${url}/getproducts`, {
         method: "GET",
-        headers: { Authorization: token },
+        headers: { Authorization: user.token },
       });
       const data = await res.json();
 
@@ -33,7 +32,6 @@ export default function Products() {
   };
 
   useEffect(() => {
-    token = JSON.parse(localStorage.getItem("token"))?.state?.user?.token;
     getAllProducts();
   }, []);
 
@@ -46,7 +44,7 @@ export default function Products() {
     try {
       const res = await fetch(`${url}/deleteproduct/${id}`, {
         method: "DELETE",
-        headers: { Authorization: token },
+        headers: { Authorization: user.token },
       });
       const data = await res.json();
 
@@ -63,7 +61,7 @@ export default function Products() {
 
   if (loading) {
     return (
-      <div class="flex items-center justify-center min-h-[80vh]">
+      <div className="flex items-center justify-center min-h-[80vh]">
         <div className="relative w-16 h-16">
           <div className="absolute inset-0 rounded-full border-4 border-blue-500/20"></div>
           <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-400 border-r-blue-500 animate-spin shadow-[0_0_20px_rgba(34,211,238,0.4)]"></div>

@@ -79,3 +79,22 @@ export const logoutUser = async (req, res) => {
     res.status(500).json({ error: true, msg: err });
   }
 };
+
+export const verifyToken = async (req, res) => {
+  try {
+    const auth = req.headers.authorization;
+    if (!auth) return res.status(401).json({ error: true, msg: "Token Requerido" });
+
+    const token = auth.split(" ")[1];
+
+    const blacklisted = await TokenBlacklist.findOne({ where: { token } });
+    if (blacklisted) return res.status(401).json({ error: true, msg: "Token Invalido" });
+
+    jwt.verify(token, process.env.SECRET, (err, decoded) => {
+      if (err) return res.status(401).json({ error: true, msg: "Token inválido o expirado" });
+      res.json({ error: false, msg: "Token Válido", data: decoded });
+    });
+  } catch (e) {
+    res.status(400).json({ error: true, msg: e });
+  }
+};
