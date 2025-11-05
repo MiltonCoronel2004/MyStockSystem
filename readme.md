@@ -146,8 +146,17 @@ VITE_API_URL=http://localhost:3000
 
 ---
 
-### FAQs
+### Rutas del Proyecto
 
-¿Dudas o sugerencias? Abre un issue en el repositorio.
-
-
+| Ruta               | Método | Funcionalidad                                                                 |
+|--------------------|--------|-------------------------------------------------------------------------------|
+| `/`                | GET    | Comprobación/estado de la API (respuesta: "API MyStockSystem online").        |
+| `/register`        | POST   | Registrar nuevo usuario (valida datos, crea usuario).                         |
+| `/login`           | POST   | Iniciar sesión; devuelve JWT (Bearer token).                                  |
+| `/getusers`        | GET    | Obtener lista de usuarios (requiere autenticación).                           |
+| `/logout`          | POST   | Cerrar sesión; añade token a blacklist (requiere autenticación).              |
+| `/getproducts`     | GET    | Obtener todos los productos del usuario autenticado.                          |
+| `/getproduct/:id`  | GET    | Obtener un producto por id (requiere autenticación).                          |
+| `/createproduct`   | POST   | Crear un producto asociado al usuario (validación + auth).                    |
+| `/updateproduct/:id` | PUT  | Actualizar un producto por id (validación parcial + auth).                    |
+| `/deleteproduct/:id` | DELETE | Eliminar un producto por id (requiere autenticación).                      |
