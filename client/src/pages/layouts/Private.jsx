@@ -7,7 +7,8 @@ import { Package, Plus, LogOut } from "lucide-react";
 export default function Private() {
   const { user, setUser } = useStore();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loadingLogOut, setLoadingLogOut] = useState(false);
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
 
   const verifyToken = async () => {
@@ -26,9 +27,12 @@ export default function Private() {
         email: null,
         token: null,
       });
+      setLoading(false);
       navigate("/login");
       return;
     }
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -37,7 +41,7 @@ export default function Private() {
     verifyToken();
   }, [location.pathname]);
 
-  if (!user.token) {
+  if (!user.token || loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="relative w-16 h-16">
@@ -50,8 +54,8 @@ export default function Private() {
   }
 
   const handleLogout = async () => {
-    if (loading) return;
-    setLoading(true);
+    if (loadingLogOut) return;
+    setLoadingLogOut(true);
 
     try {
       const url = `${import.meta.env.VITE_API_URL}/logout`;
@@ -72,7 +76,7 @@ export default function Private() {
           email: null,
           token: null,
         });
-        setLoading(false);
+        setLoadingLogOut(false);
         return;
       }
 
@@ -87,7 +91,7 @@ export default function Private() {
     } catch {
       toast.error("Error de conexión con el servidor");
     } finally {
-      setLoading(false);
+      setLoadingLogOut(false);
     }
   };
 
@@ -133,12 +137,12 @@ export default function Private() {
               {/* Logout Button */}
               <button
                 onClick={handleLogout}
-                disabled={loading}
+                disabled={loadingLogOut}
                 className="flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-slate-400 hover:text-red-400 hover:bg-slate-700/50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed hover:cursor-pointer"
                 title="Cerrar Sesión"
               >
                 <LogOut size={18} />
-                {loading ? "Cerrando..." : "Salir"}
+                {loadingLogOut ? "Cerrando..." : "Salir"}
               </button>
             </div>
           </div>
