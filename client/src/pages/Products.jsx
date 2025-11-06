@@ -35,11 +35,6 @@ export default function Products() {
     getAllProducts();
   }, []);
 
-  const handleEdit = (e, id) => {
-    e.preventDefault();
-    navigate(`/edit/${id}`);
-  };
-
   const handleDelete = async (id) => {
     try {
       const res = await fetch(`${url}/deleteproduct/${id}`, {
@@ -114,15 +109,15 @@ export default function Products() {
                   <td className="px-6 py-4">
                     <div className="flex items-center justify-center gap-2">
                       <button
-                        onClick={(e) => handleEdit(e, product.id)}
-                        className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white transition-all duration-300 shadow-[0_4px_15px_rgba(34,211,238,0.3)] hover:shadow-[0_6px_20px_rgba(34,211,238,0.5)] hover:scale-110 active:scale-95"
+                        onClick={() => navigate(`/edit/${product.id}`)}
+                        className="p-2 rounded-lg bg-linear-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white transition-all duration-300 shadow-[0_4px_15px_rgba(34,211,238,0.3)] hover:shadow-[0_6px_20px_rgba(34,211,238,0.5)] hover:scale-110 active:scale-95"
                         title="Editar"
                       >
                         <Pencil size={16} />
                       </button>
                       <button
                         onClick={() => handleDelete(product.id)}
-                        className="p-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white transition-all duration-300 shadow-[0_4px_15px_rgba(239,68,68,0.3)] hover:shadow-[0_6px_20px_rgba(239,68,68,0.5)] hover:scale-110 active:scale-95"
+                        className="p-2 rounded-lg bg-linear-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white transition-all duration-300 shadow-[0_4px_15px_rgba(239,68,68,0.3)] hover:shadow-[0_6px_20px_rgba(239,68,68,0.5)] hover:scale-110 active:scale-95"
                         title="Eliminar"
                       >
                         <Trash2 size={16} />

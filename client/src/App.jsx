@@ -27,6 +27,7 @@ export default function App() {
         {/* 404 */}
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
+
       <ToastContainer
         position="top-right"
         autoClose={3000}

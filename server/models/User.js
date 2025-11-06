@@ -1,8 +1,10 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/db.js";
 
+// Se define la clase User que hereda de Model, para crear un modelo ORM de Sequelize
 export class User extends Model {}
 
+// Inicializa el modelo con sus campos y opciones de configuración
 User.init(
   {
     id: {
@@ -36,12 +38,12 @@ User.init(
     },
   },
   {
-    sequelize,
-    tableName: "users",
-    modelName: "User",
-    timestamps: true,
-    paranoid: true,
-    underscored: true,
-    indexes: [{ unique: true, fields: ["email"] }],
+    sequelize, // instancia de conexión a la base de datos usada por este modelo
+    tableName: "users", // nombre real de la tabla
+    modelName: "User", // nombre lógico del modelo dentro de Sequelize
+    timestamps: true, // agrega automáticamente created_at y updated_at
+    paranoid: true, // activa soft delete (usa deleted_at en lugar de borrar filas)
+    underscored: true, // usa snake_case en lugar de camelCase en los campos
+    indexes: [{ unique: true, fields: ["email"] }], // índice único en el campo email
   }
 );

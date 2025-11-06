@@ -11,7 +11,7 @@ const Legend = () => (
     No tiene cuenta?{" "}
     <Link
       to="/register"
-      className="font-semibold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent hover:from-cyan-300 hover:to-blue-300 transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-linear-to-r after:from-cyan-400 after:to-blue-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
+      className="font-semibold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent hover:from-cyan-300 hover:to-blue-300 transition-all duration-300 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-linear-to-r after:from-cyan-400 after:to-blue-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300"
     >
       Crear Cuenta
     </Link>
@@ -19,7 +19,7 @@ const Legend = () => (
 );
 
 export default function Login() {
-  const { user, setUser } = useStore();
+  const { setUser } = useStore();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +27,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     try {
-      e.preventDefault();
+      e.preventDefault(); // Evita elcomportamiento por defecto del navegador
       if (loading) return;
       setLoading(true);
 
@@ -50,7 +50,6 @@ export default function Login() {
         return;
       }
 
-      // Guardar usuario en Zustand
       setUser(data.user);
 
       toast.success("Sesión iniciada");
