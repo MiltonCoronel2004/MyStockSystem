@@ -119,7 +119,6 @@ MyStockSystem/
 
 * `cors({ origin: process.env.CORS_ORIGIN || "*" })`
 * `express.json()`
-* Saludo `GET /` → `{ message: "API MyStockSystem online" }`
 * Hook conexión DB por request (authenticate → 500 si falla)
 
 ### 5.3 Modelos y asociaciones
@@ -210,12 +209,6 @@ MyStockSystem/
 * Guarda `{ token, expiresAt }` en `token_blacklist`.
 
 ### 5.6 Endpoints
-
-#### Salud
-
-* `GET /`
-
-  * **200** → `{ message: "API MyStockSystem online" }`
 
 #### Usuarios (`routes/userRoutes.js`)
 
@@ -340,7 +333,6 @@ MyStockSystem/
 
 * Estado `user: { email, full_name, token }`
 * `setUser(newUser)` para actualizar.
-* `persist` con nombre `"token"` (localStorage).
   El backend retorna `token` **con prefijo** `Bearer`, y el front lo envía tal cual en `Authorization`.
 
 ### 6.3 Páginas y comportamiento
@@ -366,7 +358,7 @@ MyStockSystem/
 
 * Carga inicial:
 
-  * Usa `localStorage.getItem("token")` (Zustand persist) para extraer `user.token` y setear `token` local (variable módulo).
+
   * `GET /getproducts` con `Authorization`
   * Muestra tabla con `id`, `name`, `price`, `stock`.
 * Acciones:
