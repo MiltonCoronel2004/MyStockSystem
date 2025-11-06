@@ -30,9 +30,9 @@ export const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findByPk(id);
-    if (!product) {
-      return res.status(404).json({ error: true, msg: "Producto no encontrado" });
-    }
+
+    if (!product) return res.status(404).json({ error: true, msg: "Producto no encontrado" });
+
     res.json({ error: false, product });
   } catch (err) {
     res.status(500).json({ error: true, msg: err.message });
@@ -45,9 +45,7 @@ export const updateProduct = async (req, res) => {
     const { name, price, stock } = req.body;
     const product = await Product.findByPk(id);
 
-    if (!product) {
-      return res.status(404).json({ error: true, msg: "Producto no encontrado" });
-    }
+    if (!product) return res.status(404).json({ error: true, msg: "Producto no encontrado" });
 
     await product.update({ name, price, stock });
     res.json({ error: false, msg: "Producto actualizado", product });
@@ -61,10 +59,9 @@ export const deleteProduct = async (req, res) => {
     const { id } = req.params;
     const product = await Product.findByPk(id);
 
-    if (!product) {
-      return res.status(404).json({ error: true, msg: "Producto no encontrado" });
-    }
+    if (!product) return res.status(404).json({ error: true, msg: "Producto no encontrado" });
 
+    // Para nuestro sistema, eliminamos el registro de la DB aunque seria mejor hacer un soft delete (deleted = 1)
     await product.destroy();
     res.json({ error: false, msg: "Producto eliminado" });
   } catch (err) {

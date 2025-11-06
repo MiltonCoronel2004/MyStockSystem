@@ -91,6 +91,7 @@ export const verifyToken = async (req, res) => {
 
     const token = auth.split(" ")[1];
 
+    // Verifica si el token enviado esta en la lista de tokens usados
     const blacklisted = await TokenBlacklist.findOne({ where: { token } });
     if (blacklisted) return res.status(401).json({ error: true, msg: "Token Invalido" });
 
