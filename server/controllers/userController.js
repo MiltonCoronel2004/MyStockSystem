@@ -22,7 +22,10 @@ export const createUser = async (req, res) => {
       return;
     }
 
+    // Genera una "sal" (valor aleatorio) con un factor de complejidad 10
     const salt = await bcrypt.genSalt(10);
+
+    // Crea un hash seguro de la contraseña combinando la contraseña original con la sal generada
     const hash = await bcrypt.hash(password, salt);
 
     const user = await User.create({
@@ -67,7 +70,10 @@ export const logoutUser = async (req, res) => {
 
     const token = auth.split(" ")[1];
 
+    // Decodifica el token JWT sin verificar su firma, solo para leer su contenido (payload)
     const decoded = jwt.decode(token);
+
+    // Convierte la fecha de expiración (exp) del token, que está en segundos UNIX, a formato Date en milisegundos
     const expiresAt = new Date(decoded.exp * 1000);
 
     await TokenBlacklist.create({ token, expiresAt });
