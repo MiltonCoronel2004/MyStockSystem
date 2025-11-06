@@ -5,6 +5,7 @@ import { useEffect } from "react";
 export default function Public() {
   const { user, setUser } = useStore();
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (user.token) return navigate("/");
   }, []);
