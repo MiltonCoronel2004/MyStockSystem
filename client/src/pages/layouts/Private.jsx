@@ -41,7 +41,7 @@ export default function Private() {
     verifyToken();
   }, [location.pathname]);
 
-  if (!user.token || loading) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-linear-to-br from-slate-950 via-blue-950 to-slate-900 p-4">
         <div className="relative w-16 h-16">
