@@ -29,7 +29,6 @@ export const createUser = async (req, res) => {
       fullName,
       email,
       hash,
-      activateToken,
     });
 
     res.json({ error: false, msg: "Usuario creado", user });
